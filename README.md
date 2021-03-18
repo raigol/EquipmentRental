@@ -1,9 +1,9 @@
 # EquipmentRental
-Equipment rental app
+Equipment rental app.
 
 Database: SQL Server LocalDB
 
-Back-End: .NET Core Runtime 3.1
+Back-End: .NET Core 3.1
 
 Front-End: Angular
 To run the front-end locally, use command 
