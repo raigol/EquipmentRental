@@ -1,10 +1,18 @@
 # EquipmentRental
 Equipment rental app.
 
-Database: SQL Server LocalDB
+**Database**: SQL Server LocalDB
 
-Back-End: .NET Core 3.1
+**Back-End**: .NET Core 3.1
 
-Front-End: Angular
-To run the front-end locally, use command 
+**Front-End**: Angular
+
+**To run the front-end locally.**
+
+Install packages using command
+
+npm install --save-dev 
+ 
+Run the app using using command 
+
 ng serve
