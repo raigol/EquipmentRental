@@ -1,0 +1,15 @@
+<div *ngIf="equipment">
+    <h2>{{equipment.name | uppercase}}</h2>
+
+    <form [formGroup]="orderForm" (ngSubmit)="addToCart()">
+        <div class="form-group">
+            <label>Number of days to rent:</label>
+            <input type="number" formControlName="quantity">
+        </div>
+        
+       
+        <button type="submit" class="btn btn-primary" [disabled]="!orderForm.valid">Order</button>
+       
+    </form>
+    
+  </div>

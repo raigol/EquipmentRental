@@ -1,0 +1,31 @@
+<h3>Shopping Cart</h3>
+
+<div *ngIf="items?.length > 0">
+    <button class="btn btn-primary btn-lg btn-block" (click)="checkout()">Checkout</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Equipment</th>
+            <th scope="col">Days</th>          
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of items">      
+            <td>
+                {{ item.equipment.name }}       
+            </td> 
+            <td>
+                {{ item.days }}
+            </td>     
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div *ngIf="invoice">
+    <h1>Thank you for order. Ivoice info below</h1>
+    <p>Invoice number {{invoice.invoiceId}}</p>
+    <p>Invoice sum {{invoice.invoiceSum}}</p>
+    <p>Loyalty points earned {{invoice.loyaltyPoints}}</p>
+</div>

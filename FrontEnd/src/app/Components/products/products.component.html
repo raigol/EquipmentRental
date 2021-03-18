@@ -1,0 +1,14 @@
+<h2>Products</h2>
+
+
+<table class="table table-striped">
+  <tbody>
+    <tr *ngFor="let equipmentItem of equipment">      
+      <td>
+        <a routerLink="/products/{{equipmentItem.equipmentId}}">
+          {{equipmentItem.name}}
+        </a>        
+      </td>      
+    </tr>
+  </tbody>
+</table>

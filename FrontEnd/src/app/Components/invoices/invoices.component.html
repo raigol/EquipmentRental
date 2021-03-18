@@ -1,0 +1,19 @@
+<h2>Invoices</h2>
+Total Loyalty Points <strong>{{loyaltyPoints}}</strong>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Sum</th>
+          <th scope="col">Loyalty Points</th>         
+        </tr>
+      </thead>
+  <tbody>
+    <tr *ngFor="let invoice of invoices">      
+      <td>{{invoice.invoiceId}}</td>
+      <td>{{invoice.invoiceSum}}</td>
+      <td>{{invoice.loyaltyPoints}}</td>      
+    </tr>
+  </tbody>
+</table>
