@@ -1,6 +1,7 @@
 using EquipmentRental.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,8 +21,10 @@ namespace EquipmentRental.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddAutoMapper(typeof(Startup));
-            services.AddDbContext<EquipmentRentalContext>();
+            services.AddAutoMapper(typeof(Startup));            
+            services.AddDbContext<EquipmentRentalContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("EquipmentRental"));
+            });
             services.AddControllers();
             services.AddSwaggerGen();
         }

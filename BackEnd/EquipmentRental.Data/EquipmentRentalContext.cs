@@ -5,12 +5,10 @@ namespace EquipmentRental.Data
 {
     public class EquipmentRentalContext : DbContext
     {
+        public EquipmentRentalContext(DbContextOptions<EquipmentRentalContext> options)
+    :   base(options)
+        { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = EquipmentRental";
-            optionsBuilder.UseSqlServer(connectionString);
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Rental>().HasKey(sc => new { sc.CustomerId, sc.EquipmentId });

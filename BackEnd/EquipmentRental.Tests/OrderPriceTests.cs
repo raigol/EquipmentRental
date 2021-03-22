@@ -6,11 +6,12 @@ namespace EquipmentRental.Tests
 {
     public class OrderPriceTests
     {
-        private readonly OrderService _orderService;
-        
+        private readonly PriceService _priceService;
+       
+
         public OrderPriceTests()
-        {
-            _orderService = new OrderService();
+        {            
+            _priceService = new PriceService();
             
         }
 
@@ -18,7 +19,7 @@ namespace EquipmentRental.Tests
         public void CalculateHeavyEquipmentRowPrice()
         {
            int days = 5;
-           decimal price = _orderService.CalculatePrice(EquipmentType.Heavy, days);
+           decimal price = _priceService.CalculatePrice(EquipmentType.Heavy, days);
 
             Assert.Equal(400, price);
         }
@@ -28,7 +29,7 @@ namespace EquipmentRental.Tests
         public void CalculateSpecializedEquipmentRowPrice()
         {
             int days = 5;
-            decimal price = _orderService.CalculatePrice(EquipmentType.Specialized, days);
+            decimal price = _priceService.CalculatePrice(EquipmentType.Specialized, days);
 
             Assert.Equal(260, price);
         }

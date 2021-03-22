@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EquipmentRental.Api.Dto;
 using EquipmentRental.Api.Services;
+using EquipmentRental.Data;
 using EquipmentRental.Data.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace EquipmentRental.Api.Controllers
     {        
         private readonly OrderService _orderService;
         private readonly IMapper _mapper;
+        private readonly EquipmentRentalContext _context;
 
-        public OrderController(IMapper mapper)
+        public OrderController(IMapper mapper, EquipmentRentalContext context)
         {
-            _orderService = new OrderService();
+            _context = context;
+            _orderService = new OrderService(_context);
             _mapper = mapper;
         }
 

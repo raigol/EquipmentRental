@@ -18,11 +18,13 @@ namespace EquipmentRental.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly EquipmentRepository _equipmentRepository;
+        private readonly EquipmentRentalContext _context;
 
-        public EquipmentController(IMapper mapper)
+        public EquipmentController(IMapper mapper, EquipmentRentalContext context)
         {
             _mapper = mapper;
-            _equipmentRepository = new EquipmentRepository(new EquipmentRentalContext());
+            _context = context;
+            _equipmentRepository = new EquipmentRepository(_context);
         }
 
 

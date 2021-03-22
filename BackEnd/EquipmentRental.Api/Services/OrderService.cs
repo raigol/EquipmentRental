@@ -15,13 +15,15 @@ namespace EquipmentRental.Api.Services
         private readonly EquipmentRepository _equipmentRepository;
         private readonly InvoiceRepository _invoiceRepository;
         private readonly EquipmentRentalContext _equipmentRentalContext;
-       
+        private readonly PriceService _priceService;
 
-        public OrderService()
+
+        public OrderService(EquipmentRentalContext context)
         {
-            _equipmentRentalContext = new EquipmentRentalContext();
+            _equipmentRentalContext = context;
             _equipmentRepository = new EquipmentRepository(_equipmentRentalContext);
             _invoiceRepository = new InvoiceRepository(_equipmentRentalContext);
+            _priceService = new PriceService();
         }
 
         public Invoice ProcessOrder(List<OrderItemDto> orders)
@@ -35,7 +37,7 @@ namespace EquipmentRental.Api.Services
             foreach (var order in orders)
             {
                 Equipment equipment = products.Where(p => p.EquipmentId == order.EquipmentId).FirstOrDefault();
-                decimal rowFee = CalculatePrice(equipment.Type, order.Quantity);
+                decimal rowFee = _priceService.CalculatePrice(equipment.Type, order.Quantity);
                 totalFee += rowFee;
                 totalLoyaltyPoints += CalculateLoyaltyPoints(equipment.Type);
                 invoiceRows.Add(new InvoiceRow { Equipment = equipment.Name, RowSum = rowFee });
@@ -47,20 +49,7 @@ namespace EquipmentRental.Api.Services
 
         }
 
-        public decimal CalculatePrice(EquipmentType equipmentType, int days)
-        {
-            const int oneTimeRentalFee = 100;
-            const int premiumDailyFee = 60;
-            const int regularDailyFee = 40;
 
-            return equipmentType switch
-            {
-                EquipmentType.Regular => oneTimeRentalFee + Math.Min(2, days) * premiumDailyFee + (days > 2 ? (days - 2) * regularDailyFee : 0),
-                EquipmentType.Heavy => oneTimeRentalFee + days * premiumDailyFee,
-                EquipmentType.Specialized => Math.Min(3, days) * premiumDailyFee + (days > 3 ? (days - 3) * regularDailyFee : 0),
-                _ => 0,
-            };
-        }
 
         private int CalculateLoyaltyPoints(EquipmentType equipmentType)
         {

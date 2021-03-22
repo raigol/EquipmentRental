@@ -13,11 +13,13 @@ namespace EquipmentRental.Api.Controllers
     {
         private readonly IMapper _mapper;
         private readonly InvoiceRepository _invoiceRepository;
+        private readonly EquipmentRentalContext _context;
 
-        public InvoiceController(IMapper mapper)
+        public InvoiceController(IMapper mapper, EquipmentRentalContext context)
         {
             _mapper = mapper;
-            _invoiceRepository = new InvoiceRepository(new EquipmentRentalContext());
+            _context = context;
+            _invoiceRepository = new InvoiceRepository(_context);
         }
 
         [HttpGet("/[controller]/{customerId}", Name = "Customer Invoices")]
