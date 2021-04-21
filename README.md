@@ -11,7 +11,7 @@ Equipment rental app.
 
 Install packages using command
 
-npm install --save-dev 
+npm install 
  
 Run the app using using command 
 
